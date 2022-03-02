@@ -1,0 +1,35 @@
+body {
+
+}
+.content {
+    width: 90vw;
+
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    column-gap: 2%;
+    row-gap: 1vh;
+}
+
+.card {
+    padding: 2.5%;
+    width: 100%;
+    border: solid black 1px;
+
+}
+.card img {
+    width: 95%;
+    height: auto;
+
+}
+
+.card button {
+    width: 95%;
+    height: 5vh;
+    font-size: 30px;
+}
+
+.card.description {
+    grid-column-start: 3;
+    grid-row-start: 1;
+    grid-row-end: span 3;
+}
