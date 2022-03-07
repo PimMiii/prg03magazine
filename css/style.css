@@ -1,11 +1,19 @@
 body {
+    font-family: Bahnschrift sans-serif;
+    background-color: black;
+    color: whitesmoke;
+}
 
+#Title {
+    font-weight: bolder;
+    width: fit-content;
+    margin-inline: auto;
 }
 
 .content {
     display: grid;
     grid-template-columns: 30% 30% 30%;
-    column-gap: 2%;
+    column-gap: 3%;
     row-gap: 1vh;
     justify-content: center;
 }
@@ -14,8 +22,11 @@ body {
     padding-left: 5%;
     padding-bottom: 2.5%;
     width: 100%;
-    border: solid black 1px;
+    border:5px solid;
+    border-image:linear-gradient(135deg,rgba(138,43,226,1),rgba(60, 185, 252,1)) 10;
+    border-radius: 5%;
     justify-items: center;
+    background: linear-gradient(135deg,rgba(138,43,226,0.15),rgba(60, 185, 252,0.15));
 
 }
 
@@ -29,6 +40,11 @@ body {
     width: 95%;
     height: 5vh;
     font-size: 30px;
+}
+
+.card h2{
+    width: fit-content;
+    margin-inline: auto;
 }
 
 .card.description {
