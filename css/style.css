@@ -24,7 +24,7 @@ body {
     margin-inline: auto ;
     display: grid;
     grid-auto-columns: 30%;
-    grid-column-gap: 1%;
+    grid-column-gap: 1.2%;
     row-gap: 1vh;
     justify-content: center;
 }
