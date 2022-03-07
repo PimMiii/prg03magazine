@@ -1,7 +1,7 @@
 body {
     font-family: Bahnschrift, serif ;
     background-color: black;
-    color: whitesmoke;
+    color: #f9f1f1;
 }
 
 #Title {
@@ -11,9 +11,11 @@ body {
 }
 
 .content {
+    width: 80vw;
+    margin-inline: auto ;
     display: grid;
     grid-template-columns: 30% 30% 30%;
-    column-gap: 3%;
+    column-gap: 4%;
     row-gap: 1vh;
     justify-content: center;
 }
@@ -38,7 +40,7 @@ body {
 
 .card button {
     width: 95%;
-    height: 5vh;
+    height: fit-content;
     font-size: 30px;
 }
 
