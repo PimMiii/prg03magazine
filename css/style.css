@@ -1,21 +1,24 @@
 body {
 
 }
-.content {
-    width: 90vw;
 
+.content {
     display: grid;
     grid-template-columns: 30% 30% 30%;
     column-gap: 2%;
     row-gap: 1vh;
+    justify-content: center;
 }
 
 .card {
-    padding: 2.5%;
+    padding-left: 5%;
+    padding-bottom: 2.5%;
     width: 100%;
     border: solid black 1px;
+    justify-items: center;
 
 }
+
 .card img {
     width: 95%;
     height: auto;
