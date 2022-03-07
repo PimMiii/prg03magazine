@@ -29,7 +29,7 @@ body {
     border-image:linear-gradient(135deg,rgba(138,43,226,1),rgba(60, 185, 252,1)) 10;
     border-radius: 5%;
     justify-items: center;
-    background: linear-gradient(135deg,rgba(138,43,226,0.15),rgba(60, 185, 252,0.15));
+    background: linear-gradient(135deg,rgba(138,43,226,0.2),rgba(60, 185, 252,0.2));
 
 }
 
