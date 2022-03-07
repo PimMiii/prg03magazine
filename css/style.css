@@ -11,7 +11,7 @@ body {
 }
 
 .content {
-    width: 80vw;
+    width: 75vw;
     margin-inline: auto ;
     display: grid;
     grid-template-columns: 30% 30% 30%;
@@ -22,8 +22,9 @@ body {
 
 .card {
     padding-left: 5%;
-    padding-bottom: 2.5%;
+    padding-bottom: 1vh;
     width: 100%;
+
     border:5px solid;
     border-image:linear-gradient(135deg,rgba(138,43,226,1),rgba(60, 185, 252,1)) 10;
     border-radius: 5%;
@@ -47,6 +48,8 @@ body {
 .card h2{
     width: fit-content;
     margin-inline: auto;
+    height: 4vh;
+
 }
 
 .card.description {
