@@ -29,6 +29,9 @@ body {
     justify-content: center;
 }
 
+
+
+
 .card {
     padding-inline:5%;
     padding-bottom: 1vh;
@@ -76,3 +79,30 @@ body {
     grid-row-end: span 3;
 
 }
+/*medium view*/
+@media only screen and (max-width: 1000px) {
+    .content {
+        width: 90%;
+        display: grid;
+        column-count: 1;
+        grid-auto-columns: unset;
+
+    }
+    .card {
+
+    }
+
+    .card.title {
+        grid-column-start: 1;
+        grid-column-end: span 1;
+        grid-row: 1;
+    }
+
+    .card.description {
+        grid-column-start: 1;
+        grid-row-start: 2;
+        grid-row-end: span 3;
+    }
+}
+
+
