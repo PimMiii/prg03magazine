@@ -1,3 +1,4 @@
+
 window.addEventListener('load', init)
 
 
@@ -6,11 +7,11 @@ let apiUrl = "http://localhost/magazine/webservice";
 let content = document.getElementById('content');
 
 function init() {
-    getGameData(apiUrl, createGameCards)
+    fetchData(apiUrl, createGameCards)
 
 }
 
-function getGameData(url, succcessHandler) {
+function fetchData(url, succcessHandler) {
     fetch(url)
         .then((response) => {
             if (!response.ok) {
