@@ -6,6 +6,12 @@ window.addEventListener('load', init)
 let apiUrl = "http://localhost/magazine/webservice";
 let content = document.getElementById('content');
 
+let secrets = fetch("./js/secrets.json")
+    .then(response => {
+        return response.json();
+    })
+    .then(secrets => console.log(secrets));
+
 function init() {
     fetchData(apiUrl, createGameCards)
 
