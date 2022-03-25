@@ -6,16 +6,25 @@ const apiUrl = "http://localhost/magazine/webservice";
 let content = document.getElementById('content');
 const secretsUrl = "./js/secrets.json"
 let secrets;
+let description;
+let favorites = [];
+// check if favorites has been set in localstorage
+if (localStorage.getItem("favorites") !== null) {
+    //if favorites has been set in localstorage
+    favorites = JSON.parse(localStorage.getItem("favorites"));
+}
+let previousTarget;
 
 
 
 function init() {
     //load secrets in.
-    fetchData(secretsUrl, setSecrets)
+    //fetchData(secretsUrl, setSecrets)
     // retrieve acces token for IGDB API
 
     // create all gamecards
     fetchData(apiUrl, createGameCards)
+    content.addEventListener('click', contentClickHandler)
 }
 
 function fetchData(url, succcessHandler) {
@@ -52,6 +61,135 @@ function postData(url = '', successHandler, mode,  headers = {}, data = {}) {
         .catch(ajaxErrorHandler);
 }
 
+function createGameCards(data) {
+    for (let game of data) {
+        // wrapper container for the game info
+        let gameCard = document.createElement('div');
+        gameCard.classList.add('card');
+        gameCard.dataset.id = game.id;
+        gameCard.id = game.id
+        // game name info
+        let gameName = document.createElement('h2');
+        gameName.innerHTML = game.name;
+        gameCard.appendChild(gameName);
+
+        // add cover image to the card
+        let cover = document.createElement('img');
+        cover.src = game.img;
+        gameCard.appendChild(cover);
+
+        // add a favourite and info button
+        let favorite = document.createElement('button');
+        favorite.classList.add('add-to-favorites');
+        favorite.dataset.id = game.id;
+        // set the icon to be the outline variant
+        let favIcon = document.createElement('i');
+        favIcon.className = 'fa-regular fa-heart'
+        favorite.appendChild(favIcon)
+        for (let i in favorites){
+            // if the id is in favorites, set the icon to be the filled variant
+            if (favorites[i] === favorite.dataset.id) {
+                favIcon.className = 'fa-solid fa-heart';
+            }
+        }
+        gameCard.appendChild(favorite);
+        let info = document.createElement('button');
+        info.classList.add('show-description');
+        info.dataset.id = game.id;
+        let infoIcon = document.createElement('i');
+        infoIcon.className = 'fa-solid fa-circle-info'
+        info.appendChild(infoIcon)
+        gameCard.appendChild(info);
+        content.appendChild(gameCard);
+    }
+}
+
+function descriptionBuilder(data) {
+    let information = data
+    // if there is no description yet
+    if(description === undefined) {
+        // create the div and assign card class and description id
+        description = document.createElement('div')
+        description.classList.add('card')
+        description.id = 'description'
+
+    } else {
+        // when a description is already active, select it and empty it's innerHTML
+        description = document.getElementById('description')
+        description.innerHTML = "";
+
+    }
+    // loop through the information object
+    for(let key of Object.keys(information)) {
+        let keyElement;
+        if (key === 'name') {
+            // name should be a h2 element
+            keyElement = document.createElement('h2');
+        } else {
+            keyElement = document.createElement('p');
+        }
+        //give the element it's class, information and append it to the description div
+        keyElement.classList.add(key);
+        keyElement.innerHTML = information[key];
+        description.appendChild(keyElement);
+
+    }
+    // append the description to the content grid
+    content.appendChild(description);
+}
+
+
+function contentClickHandler(e) {
+    let clickedItem = e.target;
+    // check to see if the clicked element is a FontAwesome icon => <i>
+    if (clickedItem.tagName === 'I') {
+        // if it is an icon, we need the parentNode to decide our action
+        let parentItem = clickedItem.parentNode;
+        switch(parentItem.className) {
+            case 'add-to-favorites':
+                // favorite icon has been clicked
+                favoriteClickHandler(clickedItem, parentItem)
+                break;
+            case 'show-description':
+                // info icon has been clicked
+                infoClickHandler(clickedItem, parentItem)
+                break;
+        }
+    }
+}
+
+function favoriteClickHandler(clickedItem, parentItem, e){
+
+    let found = false;
+    for (let i in favorites) {
+
+        if (favorites[i] === parentItem.dataset.id) {
+            found = true;
+            favorites.splice(i, 1);
+            clickedItem.className = 'fa-regular fa-heart'
+        }
+    }
+    if (!found) {
+        favorites.push(parentItem.dataset.id);
+        clickedItem.className = 'fa-solid fa-heart'
+    }
+    localStorage.setItem('favorites', JSON.stringify(favorites))
+}
+
+function infoClickHandler(clickedItem, parentItem, e) {
+    if (previousTarget !== undefined) {
+        previousTarget.id = '';
+    }
+    clickedItem.id = 'description-active';
+    previousTarget = clickedItem
+    console.log(`${apiUrl}?id=${parentItem.dataset.id}`)
+    fetchData(`${apiUrl}?id=${parentItem.dataset.id}`, descriptionBuilder)
+
+
+}
+
+
+//IGDB related functions
 function igdbGameFetch(data) {
     console.log(data);
 }
@@ -74,35 +212,11 @@ function getAccessToken(data) {
     let gameUrl = `${secrets.igdb.base_url}/games`
     let headers =
         [`Client-ID: ${secrets.igdb.client_id}`,
-        `Authorization: Bearer ${secrets.igdb.access_token}`
+            `Authorization: Bearer ${secrets.igdb.access_token}`
         ]
-        console.log(headers)
+    console.log(headers)
     let body = 'fields *';
     postData(gameUrl, igdbGameFetch, 'no-cors', headers, body)
-}
-function createGameCards(data) {
-    for (let game of data) {
-        // wrapper container for the game info
-        let gameCard = document.createElement('div');
-        gameCard.classList.add('card');
-        gameCard.dataset.id = game.id;
-        // game name info
-        let gameName = document.createElement('h2');
-        gameName.innerHTML = game.name;
-        gameCard.appendChild(gameName);
-
-        // add a favourite and info button
-        let favorite = document.createElement('button');
-        favorite.classList.add('add-to-favorites');
-        favorite.innerHTML = '<i class="fa-regular fa-heart"></i>'
-        gameCard.appendChild(favorite);
-        let info = document.createElement('button');
-        info.classList.add('show-description')
-        info.innerHTML = '<i class="fa-solid fa-circle-info"></i>'
-        gameCard.appendChild(info);
-
-        content.appendChild(gameCard);
-    }
 }
 
 function ajaxErrorHandler(data) {

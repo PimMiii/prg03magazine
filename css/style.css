@@ -9,11 +9,30 @@ body {
         background-color: black;
         color: #f9f1f1;
     }
+    .card button {
+        color: whitesmoke;
+    }
+    .fa-solid.fa-heart{
+        color:rgba(60, 185, 252,1);
+    }
+    #description-active {
+        color:rgba(60, 185, 252,1);
+    }
 }
 @media (prefers-color-scheme: light) {
     body {
         background-color: whitesmoke;
         color: black;
+    }
+    .card button {
+        color: black;
+    }
+    .fa-solid.fa-heart{
+        /*color:rgba(60, 185, 252,1);*/
+        color:rgba(138,43,226,1);
+    }
+    #description-active {
+        color: rgba(138,43,226,1);
     }
 }
 
@@ -42,8 +61,8 @@ body {
     background: linear-gradient(135deg,rgba(138,43,226,0.2),rgba(60, 185, 252,0.2));
     display: grid;
     grid-template-columns: 80% 10% 10%;
-    grid-row-gap: unset;
-    grid-template-rows: 20% 80%;
+    grid-template-rows: 30% 70%;
+
 
 }
 
@@ -51,8 +70,11 @@ body {
 .card img {
     grid-row-start: 2;
     grid-column: 1/-1;
-    width: 100%;
-    height: auto;
+    max-width: 100%;
+    width: auto;
+    height: 100%;
+    z-index: 0;
+
 
 }
 
@@ -61,18 +83,20 @@ body {
     height: fit-content;
     background: rgba(0,0,0,0);
     border: rgba(0,0,0,0);
-    color: whitesmoke;
-    font-size: 25px;
+    font-size: 1.3em;
     text-align: center;
     margin: 1vh;
+    z-index: 1;
 
 }
 
 .card h2{
     grid-row: 1;
     grid-column: 1;
-    font-size: 25px;
+    font-size: 1.3em;
     margin: 1vh;
+    z-index: 1;
+
 
     /*width: fit-content;*/
     /*margin-inline: auto;*/
@@ -97,20 +121,27 @@ body {
 }
 
 
-.card.description {
+#description {
     grid-column-start: 3;
     grid-row-start: 2;
     grid-row-end: span 3;
+    grid-template-rows: 30% 50% 20%;
+    grid-template-columns: 30% 50% 20%;
 }
 
-.card.description h2{
+#description h2{
     grid-row: 1;
-    grid-column: 1/-1;
+    grid-column-start: 1;
+    grid-column-end: span 2;
+}
+#description.playtime {
+    grid-row: 1;
+    grid-column: 3;
 }
 
-.card.description p {
+#description p {
     grid-row: 2;
-    grid-column: 1/-1;
+    grid-column: 2/-1;
 }
 /*medium view*/
 @media only screen and (max-width: 1000px) {
@@ -127,8 +158,10 @@ body {
     .card img {
         grid-row-start: 2;
         grid-column: 1/-1;
-        width: 100%;
-        height: auto;
+        max-width: 100%;
+        width: auto;
+        height: 100%;
+        z-index: 1;
     }
 
     .card.title {
@@ -137,7 +170,7 @@ body {
         grid-row: 1;
     }
 
-    .card.description {
+    #description {
         grid-column-start: 1;
         grid-row-start: 2;
         grid-row-end: span 3;
