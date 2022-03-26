@@ -122,13 +122,7 @@ function descriptionBuilder(data) {
     // loop through the information object
     for(let key of Object.keys(information)) {
         let keyElement;
-        if (key === 'name') {
-            // name should be a h2 element
-            keyElement = document.createElement('h2');
-        } else {
-            keyElement = document.createElement('p');
-        }
-        //give the element it's class, information and append it to the description div
+        keyElement = document.createElement('p');
         keyElement.classList.add(key);
         keyElement.innerHTML = information[key];
         description.appendChild(keyElement);
