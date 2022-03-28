@@ -124,7 +124,13 @@ function descriptionBuilder(data) {
         let keyElement;
         keyElement = document.createElement('p');
         keyElement.classList.add(key);
-        keyElement.innerHTML = information[key];
+        if (key === 'playtime') {
+            keyElement.innerHTML = `${information[key]} uur in-game`
+        } else if (key === 'genres') {
+            keyElement.innerHTML = information[key].join(', ')
+        } else {
+            keyElement.innerHTML = information[key];
+        }
         description.appendChild(keyElement);
 
     }
