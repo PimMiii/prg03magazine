@@ -1,58 +1,16 @@
 <?php
 require_once 'steamapi.php';
+$games = [];
+$lastUpdate = false;
+$timeout = 60 * 60; // set timeout to 60 minutes ( 60 times 60 seconds)
+
+
 /**
  * @return array
  */
 function getGames()
 {
     return getSteamGames();
-   /* return [
-        [
-            "id" => 1,
-            "name" => "Rocket League",
-            "img" => "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/header.jpg?t=1646195602"
-        ],
-        [
-            "id" => 2,
-            "name" => "Grand Theft Auto V",
-            "img" => "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg?t=1646158274"
-        ],
-        [
-            "id" => 3,
-            "name" => "Factorio",
-            "img" => "https://cdn.cloudflare.steamstatic.com/steam/apps/427520/header.jpg?t=1646056647"
-        ],
-        [
-            "id" => 4,
-            "name" => "Destiny 2",
-            "img" => "https://cdn.cloudflare.steamstatic.com/steam/apps/1085660/header.jpg?t=1646181085"
-        ],
-        [
-            "id" => 5,
-            "name" => "Cities: Skylines",
-            "img" => "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/header.jpg?t=1645798702"
-        ],
-        [
-            "id" => 6,
-            "name" => "Euro Truck Simulator 2",
-            "img" => "https://cdn.cloudflare.steamstatic.com/steam/apps/227300/header.jpg?t=1646490897"
-        ],
-        [
-            "id" => 7,
-            "name" => "Monster Hunter: World",
-            "img" => "https://cdn.cloudflare.steamstatic.com/steam/apps/582010/header.jpg?t=1645066352"
-        ],
-        [
-            "id" => 8,
-            "name" => "Path of Exile",
-            "img" => "https://cdn.cloudflare.steamstatic.com/steam/apps/238960/header.jpg?t=1646265919"
-        ],
-        [
-            "id" => 9,
-            "name" => "Tabletop Simulator",
-            "img" => "https://cdn.cloudflare.steamstatic.com/steam/apps/286160/header.jpg?t=1646353470"
-        ]
-    ];*/
 }
 
 /**
@@ -61,7 +19,8 @@ function getGames()
  */
 function getGameDetails($id)
 {
-    $tags = [
+    return getSteamInfo($id);
+    /*$tags = [
         1 => [
             "name" => "Rocket League",
             "developer" => "Psyonix LLC",
@@ -128,5 +87,5 @@ function getGameDetails($id)
         ]
     ];
 
-    return $tags[$id];
+    return $tags[$id];*/
 }
