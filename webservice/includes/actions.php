@@ -1,10 +1,12 @@
 <?php
+require_once 'steamapi.php';
 /**
  * @return array
  */
 function getGames()
 {
-    return [
+    return getSteamGames();
+   /* return [
         [
             "id" => 1,
             "name" => "Rocket League",
@@ -50,7 +52,7 @@ function getGames()
             "name" => "Tabletop Simulator",
             "img" => "https://cdn.cloudflare.steamstatic.com/steam/apps/286160/header.jpg?t=1646353470"
         ]
-    ];
+    ];*/
 }
 
 /**

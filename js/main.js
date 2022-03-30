@@ -66,8 +66,8 @@ function createGameCards(data) {
         // wrapper container for the game info
         let gameCard = document.createElement('div');
         gameCard.classList.add('card');
-        gameCard.dataset.id = game.id;
-        gameCard.id = game.id
+        gameCard.dataset.appid = game.appid;
+        gameCard.appid = game.appid
         // game name info
         let gameName = document.createElement('h2');
         gameName.innerHTML = game.name;
@@ -75,27 +75,28 @@ function createGameCards(data) {
 
         // add cover image to the card
         let cover = document.createElement('img');
-        cover.src = game.img;
+        // cover.src = `http://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`;
+        cover.src = `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`
         gameCard.appendChild(cover);
 
         // add a favourite and info button
         let favorite = document.createElement('button');
         favorite.classList.add('add-to-favorites');
-        favorite.dataset.id = game.id;
+        favorite.dataset.appid = game.appid;
         // set the icon to be the outline variant
         let favIcon = document.createElement('i');
         favIcon.className = 'fa-regular fa-heart'
         favorite.appendChild(favIcon)
         for (let i in favorites){
             // if the id is in favorites, set the icon to be the filled variant
-            if (favorites[i] === favorite.dataset.id) {
+            if (favorites[i] === favorite.dataset.appid) {
                 favIcon.className = 'fa-solid fa-heart';
             }
         }
         gameCard.appendChild(favorite);
         let info = document.createElement('button');
         info.classList.add('show-description');
-        info.dataset.id = game.id;
+        info.dataset.appid = game.appid;
         let infoIcon = document.createElement('i');
         infoIcon.className = 'fa-solid fa-circle-info'
         info.appendChild(infoIcon)
@@ -111,7 +112,7 @@ function descriptionBuilder(data) {
         // create the div and assign card class and description id
         description = document.createElement('div')
         description.classList.add('card')
-        description.id = 'description'
+        description.appid = 'description'
 
     } else {
         // when a description is already active, select it and empty it's innerHTML
@@ -163,14 +164,14 @@ function favoriteClickHandler(clickedItem, parentItem, e){
     let found = false;
     for (let i in favorites) {
 
-        if (favorites[i] === parentItem.dataset.id) {
+        if (favorites[i] === parentItem.dataset.appid) {
             found = true;
             favorites.splice(i, 1);
             clickedItem.className = 'fa-regular fa-heart'
         }
     }
     if (!found) {
-        favorites.push(parentItem.dataset.id);
+        favorites.push(parentItem.dataset.appid);
         clickedItem.className = 'fa-solid fa-heart'
     }
     localStorage.setItem('favorites', JSON.stringify(favorites))
@@ -178,12 +179,12 @@ function favoriteClickHandler(clickedItem, parentItem, e){
 
 function infoClickHandler(clickedItem, parentItem, e) {
     if (previousTarget !== undefined) {
-        previousTarget.id = '';
+        previousTarget.appid = '';
     }
-    clickedItem.id = 'description-active';
+    clickedItem.appid = 'description-active';
     previousTarget = clickedItem
-    console.log(`${apiUrl}?id=${parentItem.dataset.id}`)
-    fetchData(`${apiUrl}?id=${parentItem.dataset.id}`, descriptionBuilder)
+    console.log(`${apiUrl}?id=${parentItem.dataset.appid}`)
+    fetchData(`${apiUrl}?id=${parentItem.dataset.appid}`, descriptionBuilder)
 
 
 }
