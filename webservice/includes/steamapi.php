@@ -24,16 +24,12 @@ function loadSecrets()
 
 function getSteamGames()
 {
-// load in secrets.js
+    // load in secrets.js
     $api = loadSecrets();
-
+    // construct the request-url for the steamWebAPI IPlayerservice/GetOwnedGames interface.
     $ownedGamesUrl = $api['apiUrl'] . '/IPlayerService/GetOwnedGames/v1/?key=' . $api['apiKey'] . '&steamid=' . $api['apiID'] . '&include_appinfo=true&include_played_free_games=true';
     $output = apiCall($ownedGamesUrl);
-// we only need the games
-    $data = $output['response']['games'];
-// sort data array by playtime in descending order.
-    array_multisort(array_column($data, 'playtime_forever'), SORT_DESC, $data);
-    return $data;
+    return $output;
 }
 
 function getSteamInfo($id)

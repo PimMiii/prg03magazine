@@ -10,7 +10,13 @@ $timeout = 60 * 60; // set timeout to 60 minutes ( 60 times 60 seconds)
  */
 function getGames()
 {
-    return getSteamGames();
+    // fetch all games from my library
+    $data = getSteamGames();
+    // we only need the games
+    $data = $data['response']['games'];
+    // sort data array by playtime in descending order.
+    array_multisort(array_column($data, 'playtime_forever'), SORT_DESC, $data);
+    return $data;
 }
 
 /**
