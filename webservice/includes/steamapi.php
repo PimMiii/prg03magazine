@@ -40,15 +40,5 @@ function getSteamInfo($id)
 {
     $apiUrl = 'https://store.steampowered.com/api/appdetails/?appids=' . $id . '&l=english';
     $output = apiCall($apiUrl);
-    $output = $output[$id]['data'];
-    $whitelist = ['steam_appid', 'name', 'short_description', 'website', 'developers', 'genres'];
-    $newOutput = [];
-    foreach ($whitelist as $key) {
-        if ($key === 'steam_appid') {
-            $newOutput['appid'] = $output[$key];
-        } else {
-            $newOutput[$key] = $output[$key];
-        }
-    }
-    return $newOutput;
+    return $output;
 }

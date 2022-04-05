@@ -19,7 +19,25 @@ function getGames()
  */
 function getGameDetails($id)
 {
-    return getSteamInfo($id);
+    // fetch game info from steamapi
+    $result = getSteamInfo($id);
+    // whitelist for the keys we want te retain
+    $whitelist = ['steam_appid', 'name', 'short_description', 'website', 'developers', 'genres'];
+    $result = $result[$id]['data'];
+    // empty array for output
+    $output = [];
+    // loop through each key in the whitelist
+    foreach ($whitelist as $key) {
+        // rename the steam_appid key to appid
+        if ($key === 'steam_appid') {
+            $output['appid'] = $result[$key];
+        }
+        // place other whitelisted keys into the output array
+        else {
+            $output[$key] = $result[$key];
+        }
+    }
+    return $output;
     /*$tags = [
         1 => [
             "name" => "Rocket League",
