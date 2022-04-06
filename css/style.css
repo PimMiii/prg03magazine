@@ -98,7 +98,6 @@ body {
     text-align: center;
     margin: 1vh;
     z-index: 1;
-
 }
 
 .card h2 {
@@ -107,11 +106,6 @@ body {
     font-size: 1.3em;
     margin: 1vh;
     z-index: 1;
-
-
-    /*width: fit-content;*/
-    /*margin-inline: auto;*/
-    /*height: 4vh;*/
 }
 
 .card.add-to-favorites {

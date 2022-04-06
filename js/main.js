@@ -24,6 +24,7 @@ function init() {
     content.addEventListener('click', contentClickHandler)
 }
 
+// function to fetch data from APIs
 function fetchData(url, succcessHandler) {
     fetch(url)
         .then((response) => {
@@ -36,7 +37,7 @@ function fetchData(url, succcessHandler) {
         .catch(ajaxErrorHandler);
 }
 
-
+// function to create cards for the webpage
 function createGameCards(data) {
     gamesList = data;
     for (let game of data) {
@@ -52,7 +53,7 @@ function createGameCards(data) {
 
         // add cover image to the card
         let cover = document.createElement('img');
-        // cover.src = `http://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`;
+        // headers come from a different link than the steamwebapi uses
         cover.src = `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`
         gameCard.appendChild(cover);
 
@@ -64,13 +65,14 @@ function createGameCards(data) {
         let favIcon = document.createElement('i');
         favIcon.className = 'fa-regular fa-heart'
         favorite.appendChild(favIcon)
+        // if the id is in favorites, set the icon to be the filled variant
         for (let i in favorites) {
-            // if the id is in favorites, set the icon to be the filled variant
             if (favorites[i] === favorite.dataset.appid) {
                 favIcon.className = 'fa-solid fa-heart';
             }
         }
         gameCard.appendChild(favorite);
+        // add an info button to the card
         let info = document.createElement('button');
         info.classList.add('show-description');
         info.dataset.appid = game.appid;
@@ -78,12 +80,16 @@ function createGameCards(data) {
         infoIcon.className = 'fa-solid fa-circle-info'
         info.appendChild(infoIcon)
         gameCard.appendChild(info);
+
+        // add the created card to the contents of the webpage
         content.appendChild(gameCard);
     }
 }
 
+// function to build the description to show on the webpage
 function descriptionBuilder(data) {
     let information = data;
+    // find the right game, and grab the playtime
     let appid = information['appid']
     for (let game of gamesList) {
         if (game['appid'] === appid) {
@@ -91,7 +97,7 @@ function descriptionBuilder(data) {
             information.playtime = Math.floor(game['playtime_forever'] / 60);
         }
     }
-    console.log(information)
+    // console.log(information)
     // if there is no description yet
     if (description === undefined) {
         // create the div and assign card class and description id
@@ -167,24 +173,27 @@ function contentClickHandler(e) {
 }
 
 function favoriteClickHandler(clickedItem, parentItem, e) {
-
     let found = false;
+    // check if clicked item is already in favorites.
+    // if it is, delete from favorites => unfavorite item.
     for (let i in favorites) {
-
         if (favorites[i] === parentItem.dataset.appid) {
             found = true;
             favorites.splice(i, 1);
             clickedItem.className = 'fa-regular fa-heart'
         }
     }
+    // if it's not already favorited, add it to favorites.
     if (!found) {
         favorites.push(parentItem.dataset.appid);
         clickedItem.className = 'fa-solid fa-heart'
     }
+    // save favorites to localstorage
     localStorage.setItem('favorites', JSON.stringify(favorites))
 }
 
 function infoClickHandler(clickedItem, parentItem, e) {
+    // check to see if
     if (previousTarget !== undefined) {
         previousTarget.id = '';
     }
