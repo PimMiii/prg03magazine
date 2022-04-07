@@ -201,8 +201,6 @@ function infoClickHandler(clickedItem, parentItem) {
     previousTarget = clickedItem;
     console.log(`${apiUrl}?id=${parentItem.dataset.appid}`);
     fetchData(`${apiUrl}?id=${parentItem.dataset.appid}`, descriptionBuilder);
-
-
 }
 
 function ajaxErrorHandler(data) {
