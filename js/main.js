@@ -187,7 +187,7 @@ function favoriteClickHandler(clickedItem, parentItem) {
         favorites.push(parentItem.dataset.appid);
         clickedItem.className = 'fa-solid fa-heart';
     }
-    // save favorites to localstorage
+    // save favorites to localstorage.
     localStorage.setItem('favorites', JSON.stringify(favorites))
 }
 
