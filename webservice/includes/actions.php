@@ -1,8 +1,5 @@
 <?php
 require_once 'steamapi.php';
-$games = [];
-$lastUpdate = false;
-$timeout = 60 * 60; // set timeout to 60 minutes ( 60 times 60 seconds).
 
 
 
