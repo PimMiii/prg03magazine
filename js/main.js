@@ -12,19 +12,19 @@ let previousTarget;
 
 // check if favorites has been set in localstorage
 if (localStorage.getItem("favorites") !== null) {
-    //if favorites has been set in localstorage
+    // if favorites has been set in localstorage
     favorites = JSON.parse(localStorage.getItem("favorites"));
 }
 
 
 function init() {
-    //create game-cards
+    // create game-cards.
     fetchData(apiUrl, createGameCards);
-    //add click events to the content
+    // add click events to the content.
     content.addEventListener('click', contentClickHandler);
 }
 
-// function to fetch data from APIs
+// function to fetch data from APIs.
 function fetchData(url, successHandler) {
     fetch(url)
         .then((response) => {
@@ -37,42 +37,43 @@ function fetchData(url, successHandler) {
         .catch(ajaxErrorHandler);
 }
 
-// function to create cards for the webpage
+// function to create cards for the webpage.
 function createGameCards(data) {
     gamesList = data;
     for (let game of data) {
-        // wrapper container for the game info
+        // wrapper container for the game info.
         let gameCard = document.createElement('div');
         gameCard.classList.add('card');
         gameCard.dataset.appid = game.appid;
         gameCard.appid = game.appid;
-        // game name info
+        // game name info.
         let gameName = document.createElement('h2');
         gameName.innerHTML = game.name;
         gameCard.appendChild(gameName);
 
-        // add cover image to the card
+        // add cover image to the card.
         let cover = document.createElement('img');
-        // headers come from a different link than the SteamWebAPI uses
+        // headers come from a different link than the SteamWebAPI uses.
         cover.src = `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`;
         gameCard.appendChild(cover);
 
-        // add a favourite and info button
+        // add a favourite and info button.
         let favorite = document.createElement('button');
         favorite.classList.add('add-to-favorites');
         favorite.dataset.appid = game.appid;
-        // set the icon to be the outline variant
+        // set the icon to be the outline variant.
         let favIcon = document.createElement('i');
         favIcon.className = 'fa-regular fa-heart';
         favorite.appendChild(favIcon);
-        // if the id is in favorites, set the icon to be the filled variant
+        // if the id is in favorites, set the icon to be the filled variant.
         for (let i in favorites) {
             if (favorites[i] === favorite.dataset.appid) {
                 favIcon.className = 'fa-solid fa-heart';
             }
         }
         gameCard.appendChild(favorite);
-        // add an info button to the card
+
+        // add an info button to the card.
         let info = document.createElement('button');
         info.classList.add('show-description');
         info.dataset.appid = game.appid;
@@ -81,15 +82,15 @@ function createGameCards(data) {
         info.appendChild(infoIcon);
         gameCard.appendChild(info);
 
-        // add the created card to the contents of the webpage
+        // add the created card to the contents of the webpage.
         content.appendChild(gameCard);
     }
 }
 
-// function to build the description to show on the webpage
+// function to build the description to show on the webpage.
 function descriptionBuilder(data) {
     let information = data;
-    // find the right game, and grab the playtime
+    // find the right game, and grab the playtime.
     let appid = information['appid'];
     for (let game of gamesList) {
         if (game['appid'] === appid) {
@@ -97,21 +98,19 @@ function descriptionBuilder(data) {
             information.playtime = Math.floor(game['playtime_forever'] / 60);
         }
     }
-    // console.log(information)
-    // if there is no description yet
+    // if there is no description yet.
     if (description === undefined) {
-        // create the div and assign card class and description id
+        // create the div and assign card class and description id.
         description = document.createElement('div');
         description.classList.add('card');
         description.id = 'description';
-
     } else {
-        // when a description is already active, select it and empty it's innerHTML
+        // when a description is already active, select it and empty it's innerHTML.
         description = document.getElementById('description')
         description.innerHTML = "";
-
     }
-    // loop through the information object
+
+    // loop through the information object.
     for (let key of Object.keys(information)) {
         let keyElement;
         keyElement = document.createElement('p');
@@ -148,24 +147,24 @@ function descriptionBuilder(data) {
         description.appendChild(keyElement);
 
     }
-    // append the description to the content grid
+    // append the description to the content grid.
     content.appendChild(description);
 }
 
 
 function contentClickHandler(e) {
     clickedItem = e.target;
-    // check to see if the clicked element is a FontAwesome icon => <i>
+    // check to see if the clicked element is a FontAwesome icon => <i>.
     if (clickedItem.tagName === 'I') {
-        // if it is an icon, we need the parentNode to decide our action
+        // if it is an icon, we need the parentNode to decide our action.
         let parentItem = clickedItem.parentNode;
         switch (parentItem.className) {
             case 'add-to-favorites':
-                // favorite icon has been clicked
+                // favorite icon has been clicked.
                 favoriteClickHandler(clickedItem, parentItem);
                 break;
             case 'show-description':
-                // info icon has been clicked
+                // info icon has been clicked.
                 infoClickHandler(clickedItem, parentItem);
                 break;
         }
@@ -193,18 +192,16 @@ function favoriteClickHandler(clickedItem, parentItem) {
 }
 
 function infoClickHandler(clickedItem, parentItem) {
-    // check to see if
+    // check to see if there is a previous target, thus description set. And clear it out.
     if (previousTarget !== undefined) {
         previousTarget.id = '';
     }
     clickedItem.id = 'description-active';
     previousTarget = clickedItem;
-    console.log(`${apiUrl}?id=${parentItem.dataset.appid}`);
     fetchData(`${apiUrl}?id=${parentItem.dataset.appid}`, descriptionBuilder);
 }
 
-function ajaxErrorHandler(data) {
-    console.log(data);
+function ajaxErrorHandler() {
     let error = document.createElement('div');
     error.classList.add('error');
     error.innerHTML = "Er ging iets fout. Probeer later nog eens!";
