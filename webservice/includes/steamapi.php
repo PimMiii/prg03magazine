@@ -1,5 +1,6 @@
 <?php
 
+
 function apiCall($url)
 {
     $ch = curl_init($url);
@@ -13,7 +14,7 @@ function loadSecrets()
 {
     // load in secrets.js
     $secrets = json_decode(file_get_contents('C:\xampp\htdocs\magazine\js\secrets.json', true));
-// set up variables, cause I dislike this object->key->notation
+// set up variables, because I dislike this object->key->notation
     $output = array(
         'apiUrl' => $secrets->steam->base_url,
         'apiKey' => $secrets->steam->api_key,
@@ -26,7 +27,7 @@ function getSteamGames()
 {
     // load in secrets.js
     $api = loadSecrets();
-    // construct the request-url for the steamWebAPI IPlayerservice/GetOwnedGames interface.
+    // construct the request-url for the steamWebAPI IPlayerService/GetOwnedGames interface.
     $ownedGamesUrl = $api['apiUrl'] . '/IPlayerService/GetOwnedGames/v1/?key=' . $api['apiKey'] . '&steamid=' . $api['apiID'] . '&include_appinfo=true&include_played_free_games=true';
     $output = apiCall($ownedGamesUrl);
     return $output;
