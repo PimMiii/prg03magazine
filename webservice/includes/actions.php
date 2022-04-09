@@ -21,7 +21,7 @@ function getGames()
         "appid" => "profile",
         "name" => "Profiel",
         "student_id" => "1030831",
-        "Student_name" => "Pim van Milt",
+        "student_name" => "Pim van Milt",
         "course" => "PRG03",
         "description" => "Ik heb Games gekozen voor mijn magazine, vooral omdat ik zelf graag game. Maar ook na mijn diploma graag de Gamesindustrie in zou gaan, om games te maken die mensen zich herinneren. Omdat de game ze geraakt heeft, of om een andere reden speciaal voor ze is. <br/> Deze pagina maakt gebruik van de SteamWebAPI, om de games uit mijn library op te halen, en te kijken hoelang ik de games heb gespeeld. Mijn meest gespeelde games staan dan ook bovenaan.",
         "steam_name" => "PimMiii",
