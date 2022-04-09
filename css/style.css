@@ -374,10 +374,6 @@ body {
         height: max-content;
     }
 
-    #profile .steam_name {
-        display: none;
-    }
-
     #profile .steam_img {
         max-width: 75%;
         max-height: 85%;
