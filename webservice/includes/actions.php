@@ -2,7 +2,6 @@
 require_once 'steamapi.php';
 
 
-
 function getGames()
 {
 
@@ -14,9 +13,9 @@ function getGames()
     array_multisort(array_column($data, 'playtime_forever'), SORT_DESC, $data);
     // create a profile object, to have my 'own' data in the API
     $socials = [
-        "insta" => ["icon"=>"fa-brands fa-instagram", "url"=>"https://www.instagram.com/pimmothy_cmgt/"],
-        "twitter" => ["icon"=>"fa-brands fa-twitter", "url"=>"https://twitter.com/PimMiii"],
-        "github" => ["icon"=>"fa-brands fa-github", "url"=>"https://github.com/PimMiii"]
+        "insta" => ["icon" => "fa-brands fa-instagram", "url" => "https://www.instagram.com/pimmothy_cmgt/"],
+        "twitter" => ["icon" => "fa-brands fa-twitter", "url" => "https://twitter.com/PimMiii"],
+        "github" => ["icon" => "fa-brands fa-github", "url" => "https://github.com/PimMiii"]
     ];
     $profile = [
         "appid" => "profile",
@@ -27,7 +26,7 @@ function getGames()
         "description" => "Ik heb Games gekozen voor mijn magazine, vooral omdat ik zelf graag game. Maar ook na mijn diploma graag de Gamesindustrie in zou gaan, om games te maken die mensen zich herinneren. Omdat de game ze geraakt heeft, of om een andere reden speciaal voor ze is. <br/> Deze pagina maakt gebruik van de SteamWebAPI, om de games uit mijn library op te halen, en te kijken hoelang ik de games heb gespeeld. Mijn meest gespeelde games staan dan ook bovenaan.",
         "steam_name" => "PimMiii",
         "steam_img" => "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/29/296ccd9de05ce5aac2befce59b0c3cf3c2d72136_full.jpg",
-        "steam_img_border" =>"https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/1492660/06bb85cd5f39a963a39ae9327ea4eb7da5cd30d4.png",
+        "steam_img_border" => "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/1492660/06bb85cd5f39a963a39ae9327ea4eb7da5cd30d4.png",
         "socials" => $socials
     ];
     $profile = (object)$profile;
