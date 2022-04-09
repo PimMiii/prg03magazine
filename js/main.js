@@ -164,7 +164,7 @@ function constructProfileCard(gameCard, game) {
     gameCard.id = 'profile';
     let element;
     for (let info in game) {
-        switch (info){
+        switch (info) {
             case  "appid":
                 // do nothing with the appid field.
                 break;
@@ -194,7 +194,7 @@ function constructProfileCard(gameCard, game) {
             case "socials":
                 element = document.createElement('div');
                 element.classList.add(info);
-                for(let social in game[info]) {
+                for (let social in game[info]) {
                     // create a link element
                     let socialElement = document.createElement('a');
                     socialElement.href = game[info][social]['url'];
@@ -325,8 +325,7 @@ function infoClickHandler(clickedItem, parentItem) {
     fetchData(`${apiUrl}?id=${parentItem.dataset.appid}`, descriptionBuilder);
 }
 
-function detailModalCloseClickHandler()
-{
+function detailModalCloseClickHandler() {
     detailModal.classList.remove('open');
     clickedItem.id = "";
 }
