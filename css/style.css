@@ -25,6 +25,7 @@ body {
     a {
         color: rgba(60, 185, 252, 1);
     }
+
     a:hover {
         color: rgba(138, 43, 226, 1)
     }
@@ -51,6 +52,7 @@ body {
     a {
         color: rgba(138, 43, 226, 1);
     }
+
     a:hover {
         color: rgba(60, 185, 252, 1);
     }
@@ -144,22 +146,27 @@ body {
     align-items: start;
     text-align: start;
 }
+
 #profile .student_id {
     grid-row: 1;
     grid-column: 3;
 }
+
 #profile .student_name {
     grid-row: 1;
     grid-column: 2;
 }
+
 #profile .course {
     grid-row: 1;
     grid-column: 1;
 }
+
 #profile .description {
     grid-row: 4;
     grid-column: 1/-1;
 }
+
 #profile .steam_name {
     grid-row: 2;
     grid-column: 2/-1;
@@ -167,6 +174,7 @@ body {
     vertical-align: center;
 
 }
+
 #profile .steam_img {
     grid-row: 2/4;
     grid-column: 1;
@@ -258,7 +266,6 @@ body {
 }
 
 
-
 .modal-content p {
     font-size: 1.3em;
 }
@@ -329,7 +336,6 @@ body {
 }
 
 
-
 /*mobile view*/
 @media only screen and (max-width: 1000px) {
     #content {
@@ -384,6 +390,7 @@ body {
     #profile .socials {
         font-size: 1.3em;
     }
+
     #profile .description {
         font-size: 0.9em;
         padding-bottom: 10vh;
@@ -398,5 +405,3 @@ body {
         text-align: end;
     }
 }
-
-
