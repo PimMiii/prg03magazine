@@ -22,8 +22,11 @@ body {
         color: rgba(60, 185, 252, 1);
     }
 
-    #description a {
+    a {
         color: rgba(60, 185, 252, 1);
+    }
+    a:hover {
+        color: rgba(138, 43, 226, 1)
     }
 }
 
@@ -38,7 +41,6 @@ body {
     }
 
     .fa-solid.fa-heart {
-        /*color:rgba(60, 185, 252,1);*/
         color: rgba(138, 43, 226, 1);
     }
 
@@ -46,14 +48,17 @@ body {
         color: rgba(138, 43, 226, 1);
     }
 
-    #description a {
+    a {
         color: rgba(138, 43, 226, 1);
+    }
+    a:hover {
+        color: rgba(60, 185, 252, 1);
     }
 }
 
 
 #content {
-    width: 80vw;
+    width: 98vw;
     margin-inline: auto;
     display: grid;
     grid-auto-columns: 30%;
@@ -69,7 +74,6 @@ body {
     text-align: center;
     border: 5px solid;
     border-image: linear-gradient(135deg, rgba(138, 43, 226, 1), rgba(60, 185, 252, 1)) 10;
-    border-radius: 5%;
     justify-items: center;
     background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(60, 185, 252, 0.2));
     display: grid;
@@ -129,13 +133,56 @@ body {
 }
 
 
-#description {
+#profile {
     height: unset;
     grid-column-start: 3;
     grid-row-start: 2;
     grid-row-end: span 2;
-    grid-template-rows: 10% 70% 10% 10%;
-    grid-template-columns: 10% 60% 30%;
+    grid-template-rows: 10% 16.7% 16.7% 56.7%;
+    grid-template-columns:33.3% 33.3% 33.3%;
+    font-size: 1.3em;
+    align-items: start;
+    text-align: start;
+}
+#profile .student_id {
+    grid-row: 1;
+    grid-column: 3;
+}
+#profile .student_name {
+    grid-row: 1;
+    grid-column: 2;
+}
+#profile .course {
+    grid-row: 1;
+    grid-column: 1;
+}
+#profile .description {
+    grid-row: 4;
+    grid-column: 1/-1;
+}
+#profile .steam_name {
+    grid-row: 2;
+    grid-column: 2/-1;
+    font-size: 1.5em;
+    vertical-align: center;
+
+}
+#profile .steam_img {
+    grid-row: 2/4;
+    grid-column: 1;
+    height: auto;
+    width: 100%;
+}
+
+#profile .socials {
+    grid-row: 3;
+    grid-column: 2/-1;
+    font-size: 1.5em;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: end;
+    align-self: end;
 }
 
 #description p {
@@ -207,40 +254,59 @@ body {
     vertical-align: center;
 }
 
-/*medium view*/
-@media only screen and (max-width: 1250px) {
+/*mobile view*/
+@media only screen and (max-width: 1000px) {
     #content {
-        width: 90%;
+        width: 90vw;
         display: grid;
-        column-count: 1;
+        grid-template-columns: 0.05% 99.9% 0.05%;
         grid-auto-columns: unset;
-        font-size: 1.5em;
-
+        font-size: 1.2em;
     }
 
     .card {
+        grid-column: 2;
         max-height: max-content;
+        min-height: 30vh;
     }
 
     .card img {
         grid-row-start: 2;
         grid-column: 1/-1;
-        max-width: 100%;
+        max-width: 90%;
         width: 100%;
         height: auto;
         z-index: 1;
     }
 
     .card.title {
-        grid-column-start: 1;
+        grid-column-start: 2;
         grid-column-end: span 1;
         grid-row: 1;
+        min-height: unset;
     }
 
-    #description {
-        grid-column-start: 1;
+    #profile {
+        grid-column-start: 2;
         grid-row-start: 2;
         grid-row-end: span 3;
+        font-size: 1em;
+        min-height: 50vh;
+    }
+
+    #profile .steam_name {
+        display: none;
+    }
+
+    #profile .socials {
+        font-size: 1.3em;
+    }
+    #profile .description {
+        font-size: 0.9em;
+    }
+
+    #description .appid {
+        display: none;
     }
 }
 

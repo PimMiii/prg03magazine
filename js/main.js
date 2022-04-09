@@ -46,42 +46,102 @@ function createGameCards(data) {
         gameCard.classList.add('card');
         gameCard.dataset.appid = game.appid;
         gameCard.appid = game.appid;
-        // game name info.
-        let gameName = document.createElement('h2');
-        gameName.innerHTML = game.name;
-        gameCard.appendChild(gameName);
 
-        // add cover image to the card.
-        let cover = document.createElement('img');
-        // headers come from a different link than the SteamWebAPI uses.
-        cover.src = `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`;
-        gameCard.appendChild(cover);
+        switch (gameCard.appid) {
+            // check if it's profile object.
+            case 'profile':
+                // add the profile class to card.
+                gameCard.id = 'profile';
+                let element;
+                for (let info in game) {
+                    switch (info){
+                        case  "appid":
+                            // do nothing with the appid field.
+                            break;
+                        case  "name":
+                            // do nothing with the name field.
+                            break;
+                        case "steam_img":
+                            // make steam_img an image.
+                            element = document.createElement('img');
+                            element.classList.add(info);
+                            element.src = game[info];
+                            gameCard.appendChild(element)
+                            break;
+                        case "steam_name":
+                            element = document.createElement('p');
+                            element.classList.add(info);
+                            element.innerHTML = `Steam name: <br/> ${game[info]}`;
+                            gameCard.appendChild(element)
+                            break;
+                        case "socials":
+                            element = document.createElement('div');
+                            element.classList.add(info);
+                            for(let social in game[info]) {
+                                console.log(game[info][social]['url']);
+                                console.log(game[info][social]['icon']);
+                                // create a link element
+                                let socialElement = document.createElement('a');
+                                socialElement.href = game[info][social]['url'];
+                                // create the icon element
+                                let iElement = document.createElement('i');
+                                iElement.className = game[info][social]['icon'];
+                                // add icon to link
+                                socialElement.appendChild(iElement);
+                                // add link to div
+                                element.appendChild(socialElement);
+                                }
 
-        // add a favourite and info button.
-        let favorite = document.createElement('button');
-        favorite.classList.add('add-to-favorites');
-        favorite.dataset.appid = game.appid;
-        // set the icon to be the outline variant.
-        let favIcon = document.createElement('i');
-        favIcon.className = 'fa-regular fa-heart';
-        favorite.appendChild(favIcon);
-        // if the id is in favorites, set the icon to be the filled variant.
-        for (let i in favorites) {
-            if (favorites[i] === favorite.dataset.appid) {
-                favIcon.className = 'fa-solid fa-heart';
-            }
+                            gameCard.appendChild(element)
+                            break;
+                        default:
+                            // make the element a paragraph.
+                            element = document.createElement('p');
+                            element.classList.add(info);
+                            element.innerHTML = game[info];
+                            gameCard.appendChild(element)
+                            break;
+                    }
+                }
+                break;
+            // if it's not profile, but a real appid...
+            default:
+                // game name info.
+                let gameName = document.createElement('h2');
+                gameName.innerHTML = game.name;
+                gameCard.appendChild(gameName);
+                // add cover image to the card.
+                let cover = document.createElement('img');
+                // headers come from a different link than the SteamWebAPI uses.
+                cover.src = `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`;
+                gameCard.appendChild(cover);
+
+                // add a favourite and info button.
+                let favorite = document.createElement('button');
+                favorite.classList.add('add-to-favorites');
+                favorite.dataset.appid = game.appid;
+                // set the icon to be the outline variant.
+                let favIcon = document.createElement('i');
+                favIcon.className = 'fa-regular fa-heart';
+                favorite.appendChild(favIcon);
+                // if the id is in favorites, set the icon to be the filled variant.
+                for (let i in favorites) {
+                    if (favorites[i] === favorite.dataset.appid) {
+                        favIcon.className = 'fa-solid fa-heart';
+                    }
+                }
+                gameCard.appendChild(favorite);
+
+                // add an info button to the card.
+                let info = document.createElement('button');
+                info.classList.add('show-description');
+                info.dataset.appid = game.appid;
+                let infoIcon = document.createElement('i');
+                infoIcon.className = 'fa-solid fa-circle-info';
+                info.appendChild(infoIcon);
+                gameCard.appendChild(info);
+                break;
         }
-        gameCard.appendChild(favorite);
-
-        // add an info button to the card.
-        let info = document.createElement('button');
-        info.classList.add('show-description');
-        info.dataset.appid = game.appid;
-        let infoIcon = document.createElement('i');
-        infoIcon.className = 'fa-solid fa-circle-info';
-        info.appendChild(infoIcon);
-        gameCard.appendChild(info);
-
         // add the created card to the contents of the webpage.
         content.appendChild(gameCard);
     }
