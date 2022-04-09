@@ -7,7 +7,7 @@ body {
 @media (prefers-color-scheme: dark) {
     body {
         background-color: black;
-        color: #f9f1f1;
+        color: whitesmoke;
     }
 
     .card button {
@@ -171,6 +171,14 @@ body {
     grid-row: 2/4;
     grid-column: 1;
     height: auto;
+    max-width: 85%;
+    padding-bottom: 7%;
+}
+
+#profile .steam_img_border {
+    grid-row: 2/4;
+    grid-column: 1;
+    height: auto;
     width: 100%;
 }
 
@@ -185,23 +193,89 @@ body {
     align-self: end;
 }
 
-#description p {
+.modal {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+
+
+}
+
+.modal.open {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+    color: whitesmoke;
+}
+
+.modal-bg {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: 100%;
+}
+
+.modal-container {
+    border: 5px solid;
+    position: relative;
+    padding: 30px;
+    max-width: 80vw;
+    word-wrap: break-word;
+    border-image: linear-gradient(135deg, rgba(138, 43, 226, 1), rgba(60, 185, 252, 1)) 10;
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.5), rgba(60, 185, 252, 0.5));
+    z-index: 4;
+
+}
+
+.modal-close {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    outline: none;
+    appearance: none;
+    color: darkred;
+    background: none;
+    border: 0;
+    font-weight: bold;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.modal-content {
+    display: grid;
+    grid-template-rows: 15% 50% 20% 15%;
+    grid-template-columns:33.3% 33.3% 33.3%;
+    max-width: 1000px;
+}
+
+
+
+.modal-content p {
     font-size: 1.3em;
 }
 
-#description .icon {
+.modal-content .icon {
     grid-row: 1;
     grid-column: 1;
     align-self: center;
     vertical-align: center;
 }
 
-#description .icon img {
+.modal-content .icon img {
     height: 1.8em;
     width: auto;
 }
 
-#description .name {
+.modal-content .name {
     grid-row: 1;
     grid-column: 2;
     align-self: center;
@@ -209,14 +283,14 @@ body {
 
 }
 
-#description .playtime {
+.modal-content .playtime {
     grid-row: 1;
     grid-column: 3;
     align-self: center;
     vertical-align: center;
 }
 
-#description .short_description {
+.modal-content .short_description {
     font-size: 1em;
     grid-row: 2;
     grid-column: 1/-1;
@@ -224,7 +298,7 @@ body {
     vertical-align: center;
 }
 
-#description .genres {
+.modal-content .genres {
     word-wrap: anywhere;
     grid-row: 3;
     grid-column-start: 1;
@@ -233,26 +307,28 @@ body {
     vertical-align: center;
 }
 
-#description .developers {
+.modal-content .developers {
     grid-row: 3;
     grid-column: 3;
     align-self: center;
     vertical-align: center;
 }
 
-#description .website {
+.modal-content .website {
     grid-row: 4;
-    grid-column: 2 / -1;
+    grid-column: 3;
     align-self: center;
     vertical-align: center;
 }
 
-#description .appid {
+.modal-content .appid {
     grid-row: 4;
     grid-column: 1;
     align-self: center;
     vertical-align: center;
 }
+
+
 
 /*mobile view*/
 @media only screen and (max-width: 1000px) {
@@ -292,10 +368,17 @@ body {
         grid-row-end: span 3;
         font-size: 1em;
         min-height: 50vh;
+        height: max-content;
     }
 
     #profile .steam_name {
         display: none;
+    }
+
+    #profile .steam_img {
+        max-width: 75%;
+        max-height: 85%;
+        padding-bottom: 5%;
     }
 
     #profile .socials {
@@ -303,10 +386,16 @@ body {
     }
     #profile .description {
         font-size: 0.9em;
+        padding-bottom: 10vh;
     }
 
-    #description .appid {
+    .modal-content .appid {
         display: none;
+    }
+
+    .modal-content .website {
+        grid-column: 1/-1;
+        text-align: end;
     }
 }
 
