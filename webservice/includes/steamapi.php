@@ -3,10 +3,11 @@
 
 function apiCall($url)
 {
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $output = curl_exec($ch);
-    curl_close($ch);
+    //initialize request
+    $request = curl_init($url);
+    curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($request);
+    curl_close($request);
     return json_decode($output, true);
 }
 
