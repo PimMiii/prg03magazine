@@ -62,59 +62,8 @@ function createGameCards(data) {
         switch (gameCard.appid) {
             // check if it's profile object.
             case 'profile':
-                // add the profile class to card.
+                // construct the profile card.
                 gameCard = constructProfileCard(gameCard, game);
-
-                /*gameCard.id = 'profile';
-                let element;
-                for (let info in game) {
-                    switch (info){
-                        case  "appid":
-                            // do nothing with the appid field.
-                            break;
-                        case  "name":
-                            // do nothing with the name field.
-                            break;
-                        case "steam_img":
-                            // make steam_img an image.
-                            element = document.createElement('img');
-                            element.classList.add(info);
-                            element.src = game[info];
-                            gameCard.appendChild(element)
-                            break;
-                        case "steam_name":
-                            element = document.createElement('p');
-                            element.classList.add(info);
-                            element.innerHTML = `Steam name: <br/> ${game[info]}`;
-                            gameCard.appendChild(element)
-                            break;
-                        case "socials":
-                            element = document.createElement('div');
-                            element.classList.add(info);
-                            for(let social in game[info]) {
-                                // create a link element
-                                let socialElement = document.createElement('a');
-                                socialElement.href = game[info][social]['url'];
-                                // create the icon element
-                                let iElement = document.createElement('i');
-                                iElement.className = game[info][social]['icon'];
-                                // add icon to link
-                                socialElement.appendChild(iElement);
-                                // add link to div
-                                element.appendChild(socialElement);
-                                }
-
-                            gameCard.appendChild(element)
-                            break;
-                        default:
-                            // make the element a paragraph.
-                            element = document.createElement('p');
-                            element.classList.add(info);
-                            element.innerHTML = game[info];
-                            gameCard.appendChild(element)
-                            break;
-                    }
-                }*/
                 break;
             // if it's not profile, but a real appid...
             default:
@@ -160,7 +109,7 @@ function createGameCards(data) {
 }
 
 function constructProfileCard(gameCard, game) {
-    // add the profile class to card.
+    // add the profile id to card.
     gameCard.id = 'profile';
     let element;
     for (let info in game) {
